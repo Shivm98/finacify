@@ -9,7 +9,7 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={toggleDarkMode}
-      className="relative flex items-center justify-center w-16 h-8 bg-gray-300 dark:bg-gray-700 rounded-full p-1 cursor-pointer"
+      className="relative flex items-center justify-center w-14 h-6 bg-gray-300 dark:bg-gray-700 rounded-full p-1 cursor-pointer"
     >
       <motion.div
         className="absolute inset-0 flex items-center justify-center"
@@ -18,25 +18,25 @@ const ThemeToggle = () => {
         transition={{ type: "spring", stiffness: 200 }}
       >
         <motion.div
-          className={`absolute flex items-center justify-center w-7 h-7 rounded-full bg-gray-800 ${
+          className={`absolute flex items-center justify-center w-6 h-6 rounded-full bg-gray-800 ${
             isDarkMode ? "opacity-0" : "opacity-100"
           } transition-opacity duration-300`}
           initial={{ rotate: 0 }}
           animate={{ rotate: isDarkMode ? 720 : 0 }}
           transition={{ duration: 0.2 }}
         >
-          <SunIcon className="w-6 h-6 text-yellow-500" />
+          <SunIcon className="w-6 h-4 text-yellow-500" />
         </motion.div>
 
         <motion.div
-          className={`absolute flex items-center justify-center w-7 h-7 rounded-full bg-gray-800 ${
+          className={`absolute flex items-center justify-center w-6 h-6 rounded-full bg-gray-800 ${
             isDarkMode ? "opacity-100" : "opacity-0"
           } transition-opacity duration-300`}
           initial={{ rotate: 0 }}
           animate={{ rotate: isDarkMode ? 0 : -720 }}
           transition={{ duration: 0.2 }}
         >
-          <MoonIcon className="w-6 h-6 text-white" />
+          <MoonIcon className="w-6 h-4 text-white" />
         </motion.div>
       </motion.div>
     </button>

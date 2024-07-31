@@ -1,6 +1,5 @@
 "use client";
-
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
 
@@ -9,11 +8,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 0);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -28,9 +23,9 @@ const Header = () => {
           : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto flex justify-between items-center py-4 px-10">
+      <div className="container mx-auto flex justify-between items-center py-3 px-4 md:px-10 lg:py-4">
         <motion.div
-          className="flex items-center text-2xl font-bold text-primary"
+          className="flex items-center text-lg sm:text-xl md:text-2xl font-bold text-primary"
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
@@ -41,7 +36,7 @@ const Header = () => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-6 h-8 w-8 mr-2 font-extrabold"
+            className="h-6 w-6 md:h-8 md:w-8 mr-2 font-extrabold"
           >
             <path
               strokeLinecap="round"

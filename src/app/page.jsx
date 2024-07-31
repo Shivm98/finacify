@@ -68,9 +68,9 @@ const SIPCalculatorPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-800 p-4 md:p-10 ">
-      <div className="container mx-auto max-w-5xl bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md">
+      <div className="container mx-auto max-w-5xl bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md md:mt-2 mt-10">
         <motion.h2
-          className="text-2xl font-semibold mb-6 text-gray-700 dark:text-white"
+          className="text-lg md:text-2xl font-semibold mb-6 text-gray-700 dark:text-white"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -106,7 +106,7 @@ const SIPCalculatorPage = () => {
                 : " text-gray-700 dark:text-white"
             }`}
           >
-            I know my goal amount
+            Goal
           </button>
         </div>
         <div className="flex flex-col md:flex-row">

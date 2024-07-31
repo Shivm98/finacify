@@ -67,8 +67,8 @@ const SIPCalculatorPage = () => {
   const interestEarned = Number(goalAmount - investedAmount).toFixed(2);
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-800 p-4 md:p-10 ">
-      <div className="container mx-auto max-w-5xl bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md md:mt-2 mt-10">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-800 p-2 md:p-10 ">
+      <div className="container mx-auto max-w-5xl bg-white dark:bg-gray-700 p-2 md:p-6 rounded-lg shadow-md md:mt-2 mt-10">
         <motion.h2
           className="text-lg md:text-2xl font-semibold mb-6 text-gray-700 dark:text-white"
           initial={{ opacity: 0, y: -20 }}

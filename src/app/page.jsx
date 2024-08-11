@@ -1,12 +1,12 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Graph } from "@/components/investments/Graph";
-import { SIPForm } from "@/components/investments/SipForm";
-import { LumpsumForm } from "@/components/investments/LumpsumForm";
-import { Results } from "@/components/investments/Results";
-import { GoalForm } from "@/components/investments/GoalForm";
-import { CustomPieChart } from "@/components/investments/CustomPieChart";
+import { Graph } from "@/components/calculator/Graph";
+import { SIPForm } from "@/components/calculator/SipForm";
+import { LumpsumForm } from "@/components/calculator/LumpsumForm";
+import { Results } from "@/components/calculator/Results";
+import { GoalForm } from "@/components/calculator/GoalForm";
+import { CustomPieChart } from "@/components/calculator/CustomPieChart";
 import "./globals.css";
 
 const Page = () => {

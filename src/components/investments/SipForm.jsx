@@ -4,10 +4,12 @@ import { SliderInput } from "./SliderInput";
 export const SIPForm = ({
   monthlyInvestment,
   setMonthlyInvestment,
-  period,
-  setPeriod,
+  periodMonths,
+  setPeriodMonths,
   growthRate,
   setGrowthRate,
+  inflationRate,
+  setInflationRate,
 }) => {
   return (
     <>
@@ -16,24 +18,31 @@ export const SIPForm = ({
         value={monthlyInvestment}
         setValue={setMonthlyInvestment}
         min={0}
-        max={100000}
-        step={0.01}
+        max={10000}
+        step={10}
       />
       <SliderInput
-        label="  For a period of (years)"
-        value={period}
-        setValue={setPeriod}
+        label="For a period of (months)"
+        value={periodMonths}
+        setValue={setPeriodMonths}
         min={0}
-        max={100}
+        max={600}
         step={1}
       />
-
       <SliderInput
         label="Growth Rate (%)"
         value={growthRate}
         setValue={setGrowthRate}
         min={0}
-        max={100}
+        max={70}
+        step={0.1}
+      />
+      <SliderInput
+        label="Inflation Rate (%)"
+        value={inflationRate}
+        setValue={setInflationRate}
+        min={0}
+        max={20}
         step={0.1}
       />
     </>

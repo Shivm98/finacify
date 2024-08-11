@@ -9,37 +9,53 @@ import { GoalForm } from "@/components/investments/GoalForm";
 import { CustomPieChart } from "@/components/investments/CustomPieChart";
 import "./globals.css";
 
-const SIPCalculatorPage = () => {
+const Page = () => {
   const [mode, setMode] = useState("SIP"); // 'SIP', 'Lumpsum', or 'Goal'
   const [monthlyInvestment, setMonthlyInvestment] = useState(5000);
   const [lumpsumInvestment, setLumpsumInvestment] = useState(5000);
-  const [period, setPeriod] = useState(10);
+  const [periodMonths, setPeriodMonths] = useState(120); // Now in months
   const [growthRate, setGrowthRate] = useState(10);
   const [goalAmount, setGoalAmount] = useState(100000);
+  const [inflationRate, setInflationRate] = useState(6); // New inflation rate state
 
   const totalInvested =
-    mode === "SIP" ? monthlyInvestment * period * 12 : lumpsumInvestment;
-  const futureValue =
-    mode === "SIP"
-      ? (
-          monthlyInvestment *
-          (((1 + growthRate / 100 / 12) ** (period * 12) - 1) /
-            (growthRate / 100 / 12)) *
-          (1 + growthRate / 100 / 12)
-        ).toFixed(2)
-      : (lumpsumInvestment * (1 + growthRate / 100) ** period).toFixed(2);
+    mode === "SIP" ? monthlyInvestment * periodMonths : lumpsumInvestment;
+
+  const calculateFutureValue = () => {
+    const futureValue =
+      mode === "SIP"
+        ? (
+            monthlyInvestment *
+            (((1 + growthRate / 100 / 12) ** periodMonths - 1) /
+              (growthRate / 100 / 12)) *
+            (1 + growthRate / 100 / 12)
+          ).toFixed(2)
+        : (
+            lumpsumInvestment *
+            (1 + growthRate / 100 / 12) ** periodMonths
+          ).toFixed(2);
+
+    // Adjust for inflation
+    const inflationAdjustedFutureValue = (
+      futureValue /
+      (1 + inflationRate / 100) ** (periodMonths / 12)
+    ).toFixed(2);
+
+    return { futureValue, inflationAdjustedFutureValue };
+  };
+
+  const { futureValue, inflationAdjustedFutureValue } = calculateFutureValue();
   const gains = (futureValue - totalInvested).toFixed(2);
 
   const calculateRequiredMonthlyInvestment = () => {
     const monthlyRate = growthRate / 100 / 12;
-    const totalMonths = period * 12;
     const requiredInvestment =
-      (goalAmount * monthlyRate) / ((1 + monthlyRate) ** totalMonths - 1);
+      (goalAmount * monthlyRate) / ((1 + monthlyRate) ** periodMonths - 1);
 
     return requiredInvestment.toFixed(2);
   };
 
-  const data = Array.from({ length: period }, (_, i) => {
+  const data = Array.from({ length: periodMonths / 12 }, (_, i) => {
     const year = i + 1;
     const totalValue =
       mode === "SIP"
@@ -47,7 +63,7 @@ const SIPCalculatorPage = () => {
           (((1 + growthRate / 100 / 12) ** (year * 12) - 1) /
             (growthRate / 100 / 12)) *
           (1 + growthRate / 100 / 12)
-        : lumpsumInvestment * (1 + growthRate / 100) ** year;
+        : lumpsumInvestment * (1 + growthRate / 100 / 12) ** (year * 12);
     const investedAmount =
       mode === "SIP" ? monthlyInvestment * year * 12 : lumpsumInvestment;
     const gain = totalValue - investedAmount;
@@ -62,7 +78,7 @@ const SIPCalculatorPage = () => {
   const requiredMonthlyInvestment =
     mode === "Goal" ? calculateRequiredMonthlyInvestment() : 0;
   const investedAmount =
-    mode === "Goal" ? requiredMonthlyInvestment * period * 12 : 0;
+    mode === "Goal" ? requiredMonthlyInvestment * periodMonths : 0;
   const goalAmountData = mode === "Goal" ? goalAmount : 0;
   const interestEarned = Number(goalAmount - investedAmount).toFixed(2);
 
@@ -115,28 +131,34 @@ const SIPCalculatorPage = () => {
               <SIPForm
                 monthlyInvestment={monthlyInvestment}
                 setMonthlyInvestment={setMonthlyInvestment}
-                period={period}
-                setPeriod={setPeriod}
+                periodMonths={periodMonths}
+                setPeriodMonths={setPeriodMonths}
                 growthRate={growthRate}
                 setGrowthRate={setGrowthRate}
+                inflationRate={inflationRate}
+                setInflationRate={setInflationRate}
               />
             ) : mode === "Lumpsum" ? (
               <LumpsumForm
                 lumpsumInvestment={lumpsumInvestment}
                 setLumpsumInvestment={setLumpsumInvestment}
-                period={period}
-                setPeriod={setPeriod}
+                periodMonths={periodMonths}
+                setPeriodMonths={setPeriodMonths}
                 growthRate={growthRate}
                 setGrowthRate={setGrowthRate}
+                inflationRate={inflationRate}
+                setInflationRate={setInflationRate}
               />
             ) : (
               <GoalForm
                 goalAmount={goalAmount}
                 setGoalAmount={setGoalAmount}
-                period={period}
-                setPeriod={setPeriod}
+                periodMonths={periodMonths}
+                setPeriodMonths={setPeriodMonths}
                 growthRate={growthRate}
                 setGrowthRate={setGrowthRate}
+                inflationRate={inflationRate}
+                setInflationRate={setInflationRate}
               />
             )}
           </div>
@@ -160,6 +182,7 @@ const SIPCalculatorPage = () => {
           <div className="mt-6">
             <Results
               futureValue={futureValue}
+              inflationAdjustedFutureValue={inflationAdjustedFutureValue}
               totalInvested={totalInvested}
               gains={gains}
               mode={mode}
@@ -169,6 +192,7 @@ const SIPCalculatorPage = () => {
           <div className="mt-6">
             <Results
               futureValue={goalAmountData}
+              inflationAdjustedFutureValue={inflationAdjustedFutureValue}
               totalInvested={investedAmount}
               gains={interestEarned}
               calculateRequiredMonthlyInvestment={
@@ -183,4 +207,4 @@ const SIPCalculatorPage = () => {
   );
 };
 
-export default SIPCalculatorPage;
+export default Page;

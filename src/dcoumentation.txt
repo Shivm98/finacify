@@ -1,0 +1,68 @@
+## Financify Application Documentation
+
+### Overview
+Financify is a financial application designed to help users calculate and manage their investments effectively. The app offers tools to calculate future investment values, assess returns considering inflation, and analyze multiple investments combined. The application is built using modern web technologies to ensure a responsive and user-friendly experience.
+
+### Features
+
+#### 1. **Home Page**
+   - **Logo & Navigation**: The home page features a clickable logo that redirects to the default page and a navigation menu to access the "Investments" page.
+   - **Theme Toggle**: Users can switch between light and dark themes, enhancing the user experience based on their preference.
+
+#### 2. **Calculator Page**
+   - **SIP and Lumpsum Calculations**:
+     - Users can calculate future values based on either a Systematic Investment Plan (SIP) or a one-time lumpsum investment.
+     - The app allows users to input monthly investment amounts, investment periods, and expected growth rates.
+     - Provides a detailed breakdown of the total invested amount, gains, and future value.
+   - **Goal-Based Investments**:
+     - Users can input a financial goal, and the app will calculate the required monthly investment to reach that goal.
+     - The app takes into account the growth rate and investment period to determine the future value.
+   - **Inflation-Adjusted Future Value**:
+     - The app provides an option to calculate the future value of investments adjusted for inflation, giving users a realistic view of their investment's worth over time.
+   - **Graphical Representation**:
+     - The results are visually represented through graphs (using Recharts) to show the investment growth over time, helping users easily understand the potential returns.
+
+#### 3. **Investments Page**
+   - **Combined Investment Management**:
+     - Users can add multiple investments, each with its name, category, amount, period, growth rate, and inflation rate.
+     - The app supports multiple investment categories, including stocks, bonds, mutual funds, real estate, and more.
+   - **Responsive Investment Form**:
+     - The form allows users to input details for new investments, including investment type (SIP or Lumpsum), and displays the relevant input fields.
+   - **Investment Summary**:
+     - All added investments are displayed in a table format, with details like investment name, amount, period, growth rate, future value, category, and type.
+     - Users can edit or remove investments directly from the table.
+   - **Pie Charts for Analysis**:
+     - Two pie charts are provided: one for the distribution of investment amounts and another for future values.
+     - These charts visually represent the percentage distribution of each investment, helping users quickly assess their investment portfolio.
+   - **Combined Investment Calculations**:
+     - The app calculates the total invested amount, combined future value, and gains for all investments.
+     - It also calculates the inflation-adjusted future value for the combined investments, giving users a realistic projection of their portfolio's future worth.
+
+### Technologies Used
+
+#### 1. **Next.js**
+   - **Framework**: The app is built using Next.js, a React framework that provides server-side rendering, static site generation, and other performance optimizations.
+   - **Routing**: Next.js handles routing for different pages like the Home, Calculator, and Investments pages.
+
+#### 2. **React.js**
+   - **Component-Based Architecture**: The app is developed using React.js, which allows for the creation of reusable components like `Header`, `InvestmentForm`, `InvestmentTable`, `InvestmentPieChart`, and more.
+   - **State Management**: React’s `useState` and `useEffect` hooks are used for managing the state and handling side effects like scrolling.
+
+#### 3. **Framer Motion**
+   - **Animations**: Framer Motion is used for animations, such as the smooth transition effects when elements are scrolled or clicked, enhancing the overall user experience.
+
+#### 4. **Tailwind CSS**
+   - **Styling**: Tailwind CSS is utilized for styling, offering utility-first CSS classes that make the app highly responsive and customizable.
+   - **Dark Mode**: Tailwind CSS supports dark mode, which is toggled using the `ThemeToggle` component.
+
+#### 5. **Recharts**
+   - **Data Visualization**: Recharts is used for rendering graphs and pie charts to represent investment data visually. It helps users understand the growth and distribution of their investments.
+
+#### 6. **Zustand**
+   - **State Management**: Zustand is used for state management across components, particularly for managing theme settings (light/dark mode).
+
+#### 7. **Next.js Link Component**
+   - **Navigation**: The `Link` component from Next.js is used for client-side transitions between pages, providing a smooth navigation experience.
+
+### Conclusion
+Financify offers a comprehensive suite of tools for managing and calculating investments, with a focus on simplicity, clarity, and user experience. The use of modern technologies ensures that the app is performant, responsive, and scalable, making it a valuable tool for users looking to manage their finances effectively.

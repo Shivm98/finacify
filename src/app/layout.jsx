@@ -2,6 +2,7 @@ import { Poppins } from "next/font/google";
 
 import "./globals.css";
 import Header from "@/components/Header";
+import DailyTip from "@/components/DailyTip";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -21,7 +22,12 @@ export default function RootLayout({ children }) {
       <body className={poppins.className}>
         <Header />
 
-        <main className=" bg-gray-100 dark:bg-gray-800 pt-10">{children}</main>
+        <main className=" bg-white   dark:bg-gray-800 pt-10">
+          <div className="min-h-screen bg-white  dark:bg-gray-800 p-2 md:p-10 ">
+            <DailyTip />
+            {children}
+          </div>
+        </main>
       </body>
     </html>
   );

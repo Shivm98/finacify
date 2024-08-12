@@ -24,7 +24,7 @@ const Header = () => {
           : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto flex justify-between items-center py-3 px-4 md:px-10 lg:py-4">
+      <div className="container mx-auto flex  items-center py-3 px-4 md:px-10 lg:py-4">
         <motion.div
           className="flex items-center text-lg sm:text-xl md:text-2xl font-bold text-primary"
           initial={{ opacity: 0, x: -50 }}
@@ -49,15 +49,15 @@ const Header = () => {
             Financify
           </Link>
         </motion.div>
-        <nav className="flex items-center">
+        <nav className="flex items-center ml-4 mr-auto ">
           <Link
             href="/investments"
-            className="text-sm md:text-lg font-medium text-primary dark:text-primary underline hover:text-primary mx-4"
+            className="text-sm md:text-lg font-medium text-gray-500  hover:text-primary mx-4"
           >
             Investments
           </Link>
-          <ThemeToggle />
         </nav>
+        <ThemeToggle />
       </div>
     </header>
   );

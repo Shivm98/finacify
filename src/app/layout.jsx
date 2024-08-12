@@ -24,7 +24,6 @@ export default function RootLayout({ children }) {
 
         <main className=" bg-white   dark:bg-gray-800 pt-10">
           <div className="min-h-screen bg-white  dark:bg-gray-800 p-2 md:p-10 ">
-            <DailyTip />
             {children}
           </div>
         </main>

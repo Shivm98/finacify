@@ -8,6 +8,7 @@ import { Results } from "@/components/calculator/Results";
 import { GoalForm } from "@/components/calculator/GoalForm";
 import { CustomPieChart } from "@/components/calculator/CustomPieChart";
 import "./globals.css";
+import DailyTip from "@/components/DailyTip";
 
 const Page = () => {
   const [mode, setMode] = useState("SIP"); // 'SIP', 'Lumpsum', or 'Goal'
@@ -83,127 +84,131 @@ const Page = () => {
   const interestEarned = Number(goalAmount - investedAmount).toFixed(2);
 
   return (
-    <div>
-      <div className="container mx-auto max-w-5xl bg-white dark:bg-gray-700 p-2 md:p-6 rounded-lg border border-solid  md:mt-2 mt-10">
-        <motion.h2
-          className="text-lg md:text-2xl font-semibold mb-6 text-gray-700 dark:text-white"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          Calculate the future value of your investment
-        </motion.h2>
-        <div className="flex justify-start mb-6">
-          <button
-            onClick={() => setMode("SIP")}
-            className={`px-4 py-2 mx-2 rounded-md text-sm ${
-              mode === "SIP"
-                ? "bg-blue-100 text-primary"
-                : " text-gray-700 dark:text-white"
-            }`}
+    <>
+      <DailyTip />
+
+      <div>
+        <div className="container mx-auto max-w-5xl bg-white dark:bg-gray-700 p-2 md:p-6 rounded-lg border border-solid  md:mt-2 mt-10">
+          <motion.h2
+            className="text-lg md:text-2xl font-semibold mb-6 text-gray-700 dark:text-white"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
-            SIP
-          </button>
-          <button
-            onClick={() => setMode("Lumpsum")}
-            className={`px-4 py-2 mx-2 rounded-md text-sm ${
-              mode === "Lumpsum"
-                ? "bg-blue-100 text-primary"
-                : " text-gray-700 dark:text-white"
-            }`}
-          >
-            Lumpsum
-          </button>
-          <button
-            onClick={() => setMode("Goal")}
-            className={`px-4 py-2 mx-2 rounded-md text-sm ${
-              mode === "Goal"
-                ? "bg-blue-100 text-primary"
-                : " text-gray-700 dark:text-white"
-            }`}
-          >
-            Goal
-          </button>
-        </div>
-        <div className="flex flex-col md:flex-row">
-          <div className="md:w-2/5 md:pr-4">
-            {mode === "SIP" ? (
-              <SIPForm
-                monthlyInvestment={monthlyInvestment}
-                setMonthlyInvestment={setMonthlyInvestment}
-                periodMonths={periodMonths}
-                setPeriodMonths={setPeriodMonths}
-                growthRate={growthRate}
-                setGrowthRate={setGrowthRate}
-                inflationRate={inflationRate}
-                setInflationRate={setInflationRate}
-              />
-            ) : mode === "Lumpsum" ? (
-              <LumpsumForm
-                lumpsumInvestment={lumpsumInvestment}
-                setLumpsumInvestment={setLumpsumInvestment}
-                periodMonths={periodMonths}
-                setPeriodMonths={setPeriodMonths}
-                growthRate={growthRate}
-                setGrowthRate={setGrowthRate}
-                inflationRate={inflationRate}
-                setInflationRate={setInflationRate}
-              />
-            ) : (
-              <GoalForm
-                goalAmount={goalAmount}
-                setGoalAmount={setGoalAmount}
-                periodMonths={periodMonths}
-                setPeriodMonths={setPeriodMonths}
-                growthRate={growthRate}
-                setGrowthRate={setGrowthRate}
-                inflationRate={inflationRate}
-                setInflationRate={setInflationRate}
-              />
+            Calculate the future value of your investment
+          </motion.h2>
+          <div className="flex justify-start mb-6">
+            <button
+              onClick={() => setMode("SIP")}
+              className={`px-4 py-2 mx-2 rounded-md text-sm ${
+                mode === "SIP"
+                  ? "bg-blue-100 text-primary"
+                  : " text-gray-700 dark:text-white"
+              }`}
+            >
+              SIP
+            </button>
+            <button
+              onClick={() => setMode("Lumpsum")}
+              className={`px-4 py-2 mx-2 rounded-md text-sm ${
+                mode === "Lumpsum"
+                  ? "bg-blue-100 text-primary"
+                  : " text-gray-700 dark:text-white"
+              }`}
+            >
+              Lumpsum
+            </button>
+            <button
+              onClick={() => setMode("Goal")}
+              className={`px-4 py-2 mx-2 rounded-md text-sm ${
+                mode === "Goal"
+                  ? "bg-blue-100 text-primary"
+                  : " text-gray-700 dark:text-white"
+              }`}
+            >
+              Goal
+            </button>
+          </div>
+          <div className="flex flex-col md:flex-row">
+            <div className="md:w-2/5 md:pr-4">
+              {mode === "SIP" ? (
+                <SIPForm
+                  monthlyInvestment={monthlyInvestment}
+                  setMonthlyInvestment={setMonthlyInvestment}
+                  periodMonths={periodMonths}
+                  setPeriodMonths={setPeriodMonths}
+                  growthRate={growthRate}
+                  setGrowthRate={setGrowthRate}
+                  inflationRate={inflationRate}
+                  setInflationRate={setInflationRate}
+                />
+              ) : mode === "Lumpsum" ? (
+                <LumpsumForm
+                  lumpsumInvestment={lumpsumInvestment}
+                  setLumpsumInvestment={setLumpsumInvestment}
+                  periodMonths={periodMonths}
+                  setPeriodMonths={setPeriodMonths}
+                  growthRate={growthRate}
+                  setGrowthRate={setGrowthRate}
+                  inflationRate={inflationRate}
+                  setInflationRate={setInflationRate}
+                />
+              ) : (
+                <GoalForm
+                  goalAmount={goalAmount}
+                  setGoalAmount={setGoalAmount}
+                  periodMonths={periodMonths}
+                  setPeriodMonths={setPeriodMonths}
+                  growthRate={growthRate}
+                  setGrowthRate={setGrowthRate}
+                  inflationRate={inflationRate}
+                  setInflationRate={setInflationRate}
+                />
+              )}
+            </div>
+            {(mode === "SIP" || mode === "Lumpsum" || mode === "Goal") && (
+              <div className="md:w-3/5 md:pl-4">
+                {mode === "Goal" ? (
+                  <>
+                    <CustomPieChart
+                      investedAmount={investedAmount}
+                      goalAmount={goalAmountData}
+                      gains={interestEarned}
+                    />
+                  </>
+                ) : (
+                  <Graph data={data} />
+                )}
+              </div>
             )}
           </div>
-          {(mode === "SIP" || mode === "Lumpsum" || mode === "Goal") && (
-            <div className="md:w-3/5 md:pl-4">
-              {mode === "Goal" ? (
-                <>
-                  <CustomPieChart
-                    investedAmount={investedAmount}
-                    goalAmount={goalAmountData}
-                    gains={interestEarned}
-                  />
-                </>
-              ) : (
-                <Graph data={data} />
-              )}
+          {mode !== "Goal" ? (
+            <div className="mt-6">
+              <Results
+                futureValue={futureValue}
+                inflationAdjustedFutureValue={inflationAdjustedFutureValue}
+                totalInvested={totalInvested}
+                gains={gains}
+                mode={mode}
+              />
+            </div>
+          ) : (
+            <div className="mt-6">
+              <Results
+                futureValue={goalAmountData}
+                inflationAdjustedFutureValue={inflationAdjustedFutureValue}
+                totalInvested={investedAmount}
+                gains={interestEarned}
+                calculateRequiredMonthlyInvestment={
+                  calculateRequiredMonthlyInvestment
+                }
+                mode={mode}
+              />
             </div>
           )}
         </div>
-        {mode !== "Goal" ? (
-          <div className="mt-6">
-            <Results
-              futureValue={futureValue}
-              inflationAdjustedFutureValue={inflationAdjustedFutureValue}
-              totalInvested={totalInvested}
-              gains={gains}
-              mode={mode}
-            />
-          </div>
-        ) : (
-          <div className="mt-6">
-            <Results
-              futureValue={goalAmountData}
-              inflationAdjustedFutureValue={inflationAdjustedFutureValue}
-              totalInvested={investedAmount}
-              gains={interestEarned}
-              calculateRequiredMonthlyInvestment={
-                calculateRequiredMonthlyInvestment
-              }
-              mode={mode}
-            />
-          </div>
-        )}
       </div>
-    </div>
+    </>
   );
 };
 

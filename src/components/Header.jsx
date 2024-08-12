@@ -1,11 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link"; // Import Next.js Link component
+import Link from "next/link";
+import { usePathname } from "next/navigation"; // Import usePathname hook to get the current path
 import ThemeToggle from "./ThemeToggle";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname(); // Get the current path
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,7 +26,7 @@ const Header = () => {
           : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto flex  items-center py-3 px-4 md:px-10 lg:py-4">
+      <div className="container mx-auto flex items-center justify-between py-3 px-4 md:px-10 lg:py-4">
         <motion.div
           className="flex items-center text-lg sm:text-xl md:text-2xl font-bold text-primary"
           initial={{ opacity: 0, x: -50 }}
@@ -49,12 +51,26 @@ const Header = () => {
             Financify
           </Link>
         </motion.div>
-        <nav className="flex items-center ml-4 mr-auto ">
+        <nav className="flex items-center ml-4 mr-auto space-x-6">
           <Link
             href="/investments"
-            className="text-sm md:text-lg font-medium text-gray-500  hover:text-primary mx-4"
+            className={`text-sm md:text-lg font-medium ${
+              pathname === "/investments"
+                ? "text-primary"
+                : "text-gray-500 hover:text-primary"
+            }`}
           >
             Investments
+          </Link>
+          <Link
+            href="/learning"
+            className={`text-sm md:text-lg font-medium ${
+              pathname === "/learning"
+                ? "text-primary"
+                : "text-gray-500 hover:text-primary"
+            }`}
+          >
+            Learning
           </Link>
         </nav>
         <ThemeToggle />

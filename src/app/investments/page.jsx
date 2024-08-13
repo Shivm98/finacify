@@ -9,8 +9,8 @@ import FilterByCategory from "@/components/investments/FilterByCategory";
 
 const CombinedInvestmentsPage = () => {
   const [investments, setInvestments] = useState([]);
-  const [showForm, setShowForm] = useState(false);
-  const [showResults, setShowResults] = useState(false);
+  const [showForm, setShowForm] = useState(true);
+  const [showResults, setShowResults] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [newInvestment, setNewInvestment] = useState({
     investmentName: `Investment ${investments.length + 1}`,

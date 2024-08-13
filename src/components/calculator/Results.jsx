@@ -1,5 +1,6 @@
+"use client";
+import { formatNumber } from "@/utils";
 import React from "react";
-import { FaInfoCircle } from "react-icons/fa";
 
 export const Results = ({
   futureValue,
@@ -9,15 +10,12 @@ export const Results = ({
   calculateRequiredMonthlyInvestment,
   mode,
 }) => {
-  const formatNumber = (number) => {
-    if (number >= 1e7) {
-      return (number / 1e7).toFixed(2) + " Cr";
-    } else if (number >= 1e5) {
-      return (number / 1e5).toFixed(2) + " Lac";
-    } else {
-      return new Intl.NumberFormat("en-IN").format(number);
-    }
-  };
+  // Calculate percentage increase in total value
+  const percentageIncrease =
+    ((futureValue - totalInvested) / totalInvested) * 100;
+
+  // Calculate percentage of interest earned
+  const percentageInterestEarned = (gains / totalInvested) * 100;
 
   const Tooltip = ({ children, text }) => (
     <div className="relative group">
@@ -33,82 +31,78 @@ export const Results = ({
 
   return (
     <div className="bg-white dark:bg-gray-700 p-4 md:p-6 rounded-lg shadow-md">
-      <h3 className="text-lg font-semibold mb-6 text-gray-700 dark:text-white">
+      <h3 className="text-md font-semibold mb-4 text-gray-700 dark:text-white md:text-lg">
         Results
       </h3>
 
-      <div className="grid grid-cols-2 gap-x-6">
-        <div className="flex flex-col space-y-4">
-          {mode === "Goal" && (
-            <div className="flex justify-between items-center">
-              <span className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
-                Required Monthly Investment
-                <Tooltip text="This is how much you need to save every month to reach your goal.">
-                  <FaInfoCircle className="text-gray-500" />
-                </Tooltip>
-              </span>
-              <span className="text-md font-semibold text-gray-700 dark:text-white">
-                {formatNumber(calculateRequiredMonthlyInvestment())}
-              </span>
-            </div>
-          )}
-
-          <div className="flex justify-between items-center">
-            <span className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
-              Total Invested
-              <Tooltip text="The total amount of money you have put into this investment.">
-                <FaInfoCircle className="text-gray-500" />
-              </Tooltip>
-            </span>
-            <span className="text-md font-semibold text-gray-700 dark:text-white">
-              {formatNumber(totalInvested)}
-            </span>
-          </div>
-
-          <div className="flex justify-between items-center">
-            <span className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
-              Interest Earned
-              <Tooltip text="The profit you have made from this investment, on top of what you invested.">
-                <FaInfoCircle className="text-gray-500" />
-              </Tooltip>
-            </span>
-            <span className="text-md font-semibold text-gray-700 dark:text-white">
-              {formatNumber(gains)}
-            </span>
-          </div>
+      {mode === "Goal" && (
+        <div className="flex justify-between mb-4">
+          <span className="flex gap-2 text-sm md:text-md text-gray-600 dark:text-gray-300 md:text-base">
+            Required Monthly Investment
+            <Tooltip text="This is how much you need to save every month to reach your goal.">
+              <span className="ml-1 text-blue-600 cursor-pointer">[?]</span>
+            </Tooltip>
+          </span>
+          <span className="text-md text-gray-900 dark:text-white md:text-base">
+            {formatNumber(calculateRequiredMonthlyInvestment())}
+          </span>
         </div>
+      )}
 
-        <div className="flex flex-col space-y-4 border-l border-dotted border-gray-400 pl-6">
-          <div className="flex justify-between items-center">
-            <span className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
-              {mode === "Goal" ? "Goal Amount" : "Future Value"}
-              <Tooltip
-                text={
-                  mode === "Goal"
-                    ? "The amount you aim to have in the future."
-                    : "The estimated value of your investment in the future."
-                }
-              >
-                <FaInfoCircle className="text-gray-500" />
-              </Tooltip>
-            </span>
-            <span className="text-md font-semibold text-gray-700 dark:text-white">
-              {formatNumber(futureValue)}
-            </span>
-          </div>
+      <div className="flex justify-between mb-4">
+        <span className="flex gap-2 text-sm md:text-md text-gray-600 dark:text-gray-300 md:text-base">
+          Total Invested
+          <Tooltip text="The total amount of money you have put into this investment.">
+            <span className="ml-1 text-blue-600 cursor-pointer">[?]</span>
+          </Tooltip>
+        </span>
+        <span className="text-md text-gray-900 dark:text-white md:text-base">
+          {formatNumber(totalInvested)}
+        </span>
+      </div>
 
-          <div className="flex justify-between items-center">
-            <span className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
-              Inflation-Adjusted Value
-              <Tooltip text="The value of your investment after accounting for inflation, showing what it will be worth in today's money.">
-                <FaInfoCircle className="text-gray-500" />
-              </Tooltip>
-            </span>
-            <span className="text-md font-semibold text-gray-700 dark:text-white">
-              {formatNumber(inflationAdjustedFutureValue)}
-            </span>
-          </div>
-        </div>
+      <div className="flex justify-between mb-4">
+        <span className="flex gap-2 text-sm md:text-md text-gray-600 dark:text-gray-300 md:text-base">
+          Interest Earned
+          <Tooltip text="The profit you have made from this investment, on top of what you invested.">
+            <span className="ml-1 text-blue-600 cursor-pointer">[?]</span>
+          </Tooltip>
+        </span>
+        <span className="text-md text-gray-900 dark:text-white md:text-base">
+          {formatNumber(gains)} ({percentageInterestEarned.toFixed(2)}%)
+        </span>
+      </div>
+
+      <hr className="my-4" />
+
+      <div className="flex justify-between mb-4">
+        <span className="flex gap-2 text-sm md:text-md text-gray-600 dark:text-gray-300 md:text-base">
+          {mode === "Goal" ? "Goal Amount" : "Future Value"}
+          <Tooltip
+            text={
+              mode === "Goal"
+                ? "The amount you aim to have in the future."
+                : "The estimated value of your investment in the future."
+            }
+          >
+            <span className="ml-1 text-blue-600 cursor-pointer">[?]</span>
+          </Tooltip>
+        </span>
+        <span className="text-md text-gray-900 dark:text-white md:text-base">
+          {formatNumber(futureValue)} ({percentageIncrease.toFixed(2)}%)
+        </span>
+      </div>
+
+      <div className="flex justify-between mb-4">
+        <span className="flex gap-2 text-sm md:text-md text-gray-600 dark:text-gray-300 md:text-base">
+          Inflation-Adjusted Value
+          <Tooltip text="The value of your investment after accounting for inflation, showing what it will be worth in today's money.">
+            <span className="ml-1 text-blue-600 cursor-pointer">[?]</span>
+          </Tooltip>
+        </span>
+        <span className="text-md text-gray-900 dark:text-white md:text-base">
+          {formatNumber(inflationAdjustedFutureValue)}
+        </span>
       </div>
     </div>
   );

@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { FiMenu } from "react-icons/fi"; // Import an icon for the menu button
+import { FiMenu } from "react-icons/fi";
+import LearnMoreLinks from "@/components/learning/LearnMoreLinks"; // Import the LearnMoreLinks component
 
 export default function InvestmentsLayout({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -11,9 +12,7 @@ export default function InvestmentsLayout({ children }) {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-100 ">
-      {" "}
-      {/* Adjust padding to account for header */}
+    <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar only visible on screens larger than lg (1024px and above) */}
       <aside
         className={`hidden lg:block fixed inset-y-0 left-0 z-30 w-64 bg-white border-r border-gray-200 p-4 lg:static lg:w-64 lg:flex lg:flex-col`}
@@ -83,8 +82,10 @@ export default function InvestmentsLayout({ children }) {
         </nav>
       </aside>
       {/* Main Content Area */}
-      <main className="flex-1 p-8 lg:ml-64 pt-16">{children}</main>{" "}
-      {/* Adjust padding to account for header */}
+      <main className="flex-1 p-8 lg:ml-64 pt-16">
+        {children}
+        <LearnMoreLinks /> {/* Render the LearnMoreLinks component */}
+      </main>
     </div>
   );
 }
